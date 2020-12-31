@@ -1,0 +1,38 @@
+
+body{
+	/* cursor: url(https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.1.6/images/mouse.cur),auto; */
+	background-color: #EFEFEF;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+#top-ul ul li{
+	margin-left: 15px;
+}
+.navbar-default{
+	background-color: lightcyan;
+}
+.badge{
+	background-color: lightsteelblue;
+}
+.navbar {
+	margin-bottom: 0px;
+}
+.span-font{
+	font-size: 1.5em;
+}
+.jumbotron{
+	padding: 0px;
+	
+}
+.row{
+	/* background: lightpink; */
+	height: 100px;
+}
+
+.footer{
+	text-align: center;
+}

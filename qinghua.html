@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUNU | 理想的生活就是生活的理想</title>
+	<link rel="shortcut icon" type="text/css" href="images/blog.png"/>
+	<link rel="bookmark" type="text/css" href="images/blog.png"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="css/leftContent.css"/>
+	<link rel="stylesheet" type="text/css" href="css/rightInfo.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script><!-- axios-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/changeTitle.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="nav">
+    <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+	</div>
+	
+	<div id="content" class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 container leftContent" >
+					<div id="vueBox"  class="content-box" >
+						<p><span class="label label-success" style="font-size: 16px;">{{txt}} </span> </p>
+					</div>
+					<div class="content-box">
+						<script src="js/passage00.js" type="text/javascript" charset="utf-8"></script>
+					</div>
+					
+					<div  class="content-box">
+						<script src="js/passage01.js" type="text/javascript" charset="utf-8"></script>
+					</div>
+					
+					<nav aria-label="...">
+					  <ul class="pager">
+					    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+					    <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+					  </ul>
+					</nav>
+				</div>
+				<div class="col-md-4 container "<!-- col-md-offset-1右偏移类-->
+					<script src="js/rightInfo.js" type="text/javascript" charset="utf-8"></script>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div id="footer" class="footer">
+		<script src="./js/footer.js" type="text/javascript" charset="utf-8"></script>
+	</div>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				joke:"",
+				poetry:"",
+			},
+			mounted:function(){
+				this.getJoke();
+				this.getPoetry();
+			},
+			methods:{
+				getJoke:function(){
+					var temp = this;
+					axios.get("https://autumnfish.cn/api/joke").then(
+					function (response) {
+					//	  console.log(response.data);
+					temp.joke = response.data ;
+					},function (err) {
+						thmp.joke ="好像出问题了呢";
+					})
+				},
+				getPoetry:function(){
+					var temp = this;
+					axios.get("https://v1.alapi.cn/api/shici?type=shenghuo").then(
+					function (response) {
+						  // console.log(response.data);
+					temp.poetry = response.data.data.content ;
+					},function (err) {
+						thmp.poetry ="乘风破浪会有时，直挂云帆济沧海。";
+					})
+				},
+			}
+		});
+		var txt = new Vue({
+			el:"#vueBox",
+			data:{
+				txt:"",
+			},
+			mounted:function(){
+				this.getQinghua();
+			},
+			methods:{
+				getQinghua:function(){
+					var temp = this;
+					axios.get("https://v1.alapi.cn/api/qinghua").then(
+					function (response) {
+					temp.txt = response.data.data.content ;
+					},function (err) {
+						thmp.joke ="好像出问题了呢";
+					})
+				},
+			}
+		})
+	</script>
+</body>
+</html>
